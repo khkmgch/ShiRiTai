@@ -12,18 +12,24 @@ https://khkmgch.github.io/ShiRiTai/
 
 ## Usage
 あなたの”ShiRiTai”をカードにしましょう。
-(使用例)　「どうして空は青いの？」と考えた時、
+(使用例)　
+
+「どうして空は青いの？」と考えた時、
 
 ![ShiRiTai1](https://user-images.githubusercontent.com/101968115/174439475-648e2419-9add-498d-aa4f-577f30e64a87.png)
 
 カテゴリ名　>> 気象
+
 カテゴリカラー　>> 水色
+
 タイトル　>>「どうして空は青いの？」
 
 のように入力してカードを作成します。
 
-カテゴリ名とカテゴリカラーは後で変更できます。
 
+※カテゴリ名とカテゴリカラーは後で変更できます。
+
+![ShiRiTai2](https://user-images.githubusercontent.com/101968115/174439503-68f02679-8569-47c3-a08f-1a09e5681e80.png)
 
 カードの詳細は、カード右上のアイコンをクリックすると見ることができます。
 
@@ -35,7 +41,7 @@ https://khkmgch.github.io/ShiRiTai/
 
 つけたりできます。
 
-![ShiRiTai2](https://user-images.githubusercontent.com/101968115/174439503-68f02679-8569-47c3-a08f-1a09e5681e80.png)
+
 
 
 (チャート)
