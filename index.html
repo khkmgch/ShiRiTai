@@ -123,7 +123,7 @@
 
             <div class='container col-lg-6 p-3 mt-5 bg-light'>
                 <div class="d-flex justify-content-center">
-                    <div class="text-md">スタイル変更</div>
+                    <div class="text-lg">スタイル変更</div>
                     <div class="expand-switch col-1 d-flex justify-content-center mt-1" v-on:click="switchView_StyleChange()">
                         <i v-if="!isShow_StyleChange" class="fa-solid fa-angle-down"></i>
                         <i v-else class="fa-solid fa-angle-up"></i>
@@ -165,7 +165,7 @@
 
             <div class='container col-lg-6 p-3 mt-5 bg-light'>
                 <div class="d-flex justify-content-center">
-                    <div class="text-md">ステータス</div>
+                    <div class="text-lg">ステータス</div>
                     <div class="expand-switch col-1 d-flex justify-content-center mt-1" v-on:click="switchView_Gragh();">
                         <i v-if="!isShow_Gragh" class="fa-solid fa-angle-down"></i>
                         <i v-else class="fa-solid fa-angle-up"></i>
@@ -196,7 +196,7 @@
                                             <i v-if="!card.data[`completed`]" class="fa-regular fa-circle mb-1 me-1"></i>
                                             <i v-else class="fa-regular fa-circle-dot mb-1 me-1"></i>
                                         </div>
-                                        <div class="card-title fw-bold">{{card.data["title"]}}</div>
+                                        <div class="card-title text-lg fw-bold">{{card.data["title"]}}</div>
                                     </div>
                                     <div class="expand-switch col-1 d-flex justify-content-end" v-on:click="expandClick(card); expandSwitch();">
                                         <i v-if="!card.data[`detailShow`]" class="fa-solid fa-angle-down"></i>
