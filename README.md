@@ -1,9 +1,9 @@
-# ShiRiTai
+# SHiRiTai
 
 ## Descripsiton
 RecursionのProject「To Do List」で作成しました。
 
-あなたの”ShiRiTai”をカードにしてストックできるアプリです。
+あなたの”SHiRiTai”をカードにしてストックできるアプリです。
 ![ShiRiTai11](https://user-images.githubusercontent.com/101968115/174439987-2ed2faae-e13c-4d11-8f07-8eac2c80017e.png)
 
 
@@ -11,7 +11,7 @@ RecursionのProject「To Do List」で作成しました。
 https://khkmgch.github.io/ShiRiTai/
 
 ## Usage
-あなたの”ShiRiTai”をカードにしましょう。
+あなたの”SHiRiTai”をカードにしましょう。
 
 (使用例)　
 
