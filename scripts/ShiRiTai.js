@@ -444,7 +444,7 @@ var app = new Vue({
             }else{
                 parent.value = true;
             }
-            parent.style.width = nextWidth;
+            parent.style.width = `${nextWidth}px`;
         },
         //テキスト編集をオンにする
         editOn: function(){
