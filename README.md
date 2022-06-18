@@ -70,7 +70,8 @@ https://khkmgch.github.io/ShiRiTai/
 
 ![ShiRiTai9](https://user-images.githubusercontent.com/101968115/174439772-6f901599-750b-4f9d-b34d-a2836165fa0c.png)
 
-
+(データ保存)
+データはlocalStorageに保存することができます。
 
 (その他の使用例)
 
