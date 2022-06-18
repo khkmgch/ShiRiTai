@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+        <!-- fontawesome -->
+        <script src="https://kit.fontawesome.com/bbf8527868.js" crossorigin="anonymous"></script>
+
+        <!-- Vue.js CDN -->
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="styles/style.css">
+
+        <!-- chart.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.js" integrity="sha512-Lii3WMtgA0C0qmmkdCpsG0Gjr6M0ajRyQRQSbTF6BsrVh/nhZdHpVZ76iMIPvQwz1eoXC3DmAg9K51qT5/dEVg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP&display=swap" rel="stylesheet">
+
+        <title>ShiRiTai</title>
+    </head>
+    <body>
+        <div id="app">
+
+            <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top text-md">
+                <div class="container-fluid">
+                    <a class="navbar-brand text-lg ms-2" href="" v-on:click="dataSave();">SHiRiTai</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item dropdown">
+                                <div class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa-solid fa-gear"></i>
+                                </div>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><div class="dropdown-item" v-on:click="dataSave(); alert_DataSave();">データ保存</div></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><div class="dropdown-item" v-on:click="dataReset();">データリセット</div></li>
+                                </ul>
+                            </li>
+                            
+                        </ul>
+                    
+                        <form id="searchForm" class="d-flex flex-column flex-sm-row mt-sm-3" v-on:submit.prevent="update_cardsArray();">
+                            <select class="form-select form-select-sm me-sm-2 my-2 my-sm-0" aria-label=".form-select-sm example" v-model="selectedCategory_CardSearch">
+                                <option value="all" selected>All</option>
+                                <template v-if="this.categoriesArray.length !== 0">
+                                    <template v-for="ele in categoriesArray">
+                                        <option v-bind:value="ele[0]">{{ele[1]["name"]}}</option>
+                                    </template>
+                                </template>
+                            </select>
+                            <select class="form-select form-select-sm me-sm-2 my-2 my-sm-0" aria-label=".form-select-sm example" v-model="selectedComplete_CardSearch">
+                                <option value="all" selected>All</option>
+                                <option value="done">Done</option>
+                                <option value="notYet">Not yet</option>
+                            </select>
+                            <select class="form-select form-select-sm me-sm-2 my-2 my-sm-0" aria-label=".form-select-sm example" v-model="selectedFavorite_CardSearch">
+                                <option value="all" selected>All</option>
+                                <option value="favorite">Favorite</option>
+                            </select>
+                            <input class="form-control me-sm-2 my-2 my-sm-0" type="search" placeholder="type keyword" aria-label="Search" v-model="keyword_CardSearch">
+                            <button class="btn btn-outline-light" type="submit">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </nav>
+
+            <div class='container col-lg-6 p-3 mt-5 bg-light'>
+
+                <div id="card-create" class="text-md p-1">
+                    <form class="input-group mb-3 w-md-50 d-flex justify-content-center" v-on:submit.prevent="createCard();">
+                        <div class="col-12">
+                            <div class="text-start">カテゴリ選択</div>
+                            
+                            <select id="select-category" class="col-12 rounded border border-secondary px-2 py-1" v-model="selectedCategory_CardCreate">
+                                <option hidden value="" required>選択してください</option>
+                                <template v-if="this.categoriesArray.length !== 0">
+                                    <template v-for="ele in categoriesArray">
+                                        <option v-bind:value="ele[0]">{{ele[1]["name"]}}</option>
+                                    </template>
+                                </template>
+                                <option value="new" class="fw-bold">(新規作成)</option>
+                            </select>
+                        </div>
+
+                        <transition name="fade">
+                            <template v-if="selectedCategory_CardCreate == `new`">
+                                <div id="category-new" class="col-12 overflow-hidden">
+                                    <div class="text-start">カテゴリ名</div>
+                                    <input type="text" class="input-categoryName col-12 rounded border border-secondary px-2 py-1" placeholder="（例）科学" aria-label="Recipient's username" aria-describedby="button-addon" required>
+                                    <div>
+                                        <div class="text-start">カテゴリカラー</div>
+                                        <input class="input-categoryColor" type="color"  />
+                                    </div>
+                                </div>
+                            </template>
+                        </transition>
+
+                        <div class="col-12">
+                            <div class="text-start">タイトル</div>
+                            <input type="text" class="input-title col-12 rounded border border-secondary px-2 py-1" placeholder="（例）どうして空は青いの？" aria-label="Recipient's username" aria-describedby="button-addon" required>
+                        </div>
+
+                        <button class="btn btn-outline-secondary rounded col-6 mt-3" type="submit">カードを作成する</button>
+                    </form>
+                </div>
+
+            </div>
+
+            <div class='container col-lg-6 p-3 mt-5 bg-light'>
+                <div class="d-flex justify-content-center">
+                    <div class="text-md">スタイル変更</div>
+                    <div class="expand-switch col-1 d-flex justify-content-center mt-1" v-on:click="switchView_StyleChange()">
+                        <i v-if="!isShow_StyleChange" class="fa-solid fa-angle-down"></i>
+                        <i v-else class="fa-solid fa-angle-up"></i>
+                    </div>
+                </div>
+                
+                <transition name="fade">
+                    <template v-if="isShow_StyleChange">
+                        <div id="style-change" class="text-md overflow-hidden p-1">
+                            <form class="input-group mb-3 w-md-50 d-flex justify-content-center">
+                                <div class="col-12">
+                                    <div class="text-start">カテゴリ選択</div>
+                                    <select class="col-12 rounded border border-secondary px-2 py-1" v-model="selectedCategory_StyleChange" v-on:change="switchCategory()">
+                                        <option hidden value="">選択してください</option>
+                                        <template v-if="this.categoriesArray.length !== 0">
+                                            <template v-for="ele in categoriesArray">
+                                                <option v-bind:value="ele[0]">{{ele[1]["name"]}}</option>
+                                            </template>
+                                        </template>
+                                    </select>
+                                </div>
+                                <div class="col-12">
+                                    <div class="text-start">カテゴリ名</div>
+                                    <input class="input-categoryName rounded border border-secondary px-2 py-1" type="text" v-on:change="changeCategory(); drawChart();">
+                                </div>
+
+                                <div class="col-12">
+                                    <div>
+                                        <div class="text-start">カテゴリカラー</div>
+                                        <input class="input-categoryColor" type="color" v-on:change="changeCategory(); drawChart();"/>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </template>
+                </transition>
+
+            </div>
+
+            <div class='container col-lg-6 p-3 mt-5 bg-light'>
+                <div class="d-flex justify-content-center">
+                    <div class="text-md">ステータス</div>
+                    <div class="expand-switch col-1 d-flex justify-content-center mt-1" v-on:click="switchView_Gragh();">
+                        <i v-if="!isShow_Gragh" class="fa-solid fa-angle-down"></i>
+                        <i v-else class="fa-solid fa-angle-up"></i>
+                    </div>
+                </div>
+                <transition name="fade">
+                    <template v-if="isShow_Gragh">
+                        <div id="gragh-view" class="overflow-hidden p-5">
+                            <canvas ref="chart"></canvas>
+                        </div>
+                    </template>
+                </transition>
+            </div>
+
+            <template v-if="cardsArray.length === 0">
+                <div class='container my-5 p-0 py-3 bg-light d-flex flex-wrap justify-content-center text-md fw-bold'>
+                    あなたの"SHiRiTai"を書いてみましょう
+                </div>           
+            </template>
+            <template v-else>
+                <div id="cards-view" class='container my-5 p-0 bg-light d-flex flex-wrap justify-content-center text-md'>
+                    <template v-for="card in cardsArray">
+                        <div class="card-style rounded card-width m-1" v-bind:style="cardStyleObject(card)" value="false">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <div class="d-flex align-items-center">
+                                        <div class="complete-check" v-on:click="completeCheck(card)">
+                                            <i v-if="!card.data[`completed`]" class="fa-regular fa-circle mb-1 me-1"></i>
+                                            <i v-else class="fa-regular fa-circle-dot mb-1 me-1"></i>
+                                        </div>
+                                        <div class="card-title fw-bold">{{card.data["title"]}}</div>
+                                    </div>
+                                    <div class="expand-switch col-1 d-flex justify-content-end" v-on:click="expandClick(card); expandSwitch();">
+                                        <i v-if="!card.data[`detailShow`]" class="fa-solid fa-angle-down"></i>
+                                        <i v-else class="fa-solid fa-angle-up"></i>
+                                    </div>
+                                </div>
+                                <p v-bind:style="textStyleObject(card)">{{categories[card.data["categoryId"]]["name"]}}</p>
+                                <transition name="fade">
+                                    <template v-if="card.data[`detailShow`]">
+                                        <div class="card-detail">
+                                            <div class="d-flex justify-content-between">
+                                                <p>Num: {{card.data["id"]}}</p>
+                                                <p>[{{card.data["date"]}}]</p>
+                                            </div>
+                                            <textarea class="card-text-detail col-12" v-bind:value="card.data[`answer`]" v-on:change="answerEdit(card)" disabled>
+                                
+                                            </textarea>
+                                            <div class="d-flex justify-content-end">
+                                               <div class="star btn btn-secondary m-1" v-on:click="favorite(card)">
+                                                    <i v-if="!card.data[`favorited`]" class="fa-regular fa-star"></i>
+                                                    <i v-else class="fa-solid fa-star"></i>
+                                                </div>
+                                                <div class="btn btn-secondary m-1" v-on:click="editOn">
+                                                    <i class="fa-solid fa-pen"></i>
+                                                </div>
+                                                <div class="btn btn-secondary m-1" v-on:click="throwAway(card)">
+                                                    <i class="fa-solid fa-trash-can"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </transition>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </template>
+
+        </div>
+
+
+        <!-- jquery JS -->
+        <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+        <!-- Popper JS -->
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+     
+    </body>
+</html>
