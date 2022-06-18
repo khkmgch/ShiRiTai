@@ -422,7 +422,7 @@ var app = new Vue({
         },
         //カードを、complete,favorite,keywordによって判定する(narrowDown()内で使用する)(boolean)
         idValid_ByComplete_Favorite_Keyword: function(node, complete, favorite, keyword){
-            if(favorite == "favorite" && !node.data["favorite"])return false;
+            if(favorite == "favorite" && !node.data["favorited"])return false;
             
             if(complete == "all"){
                 return !(keyword != "" && node.data["title"].indexOf(keyword) == -1);
