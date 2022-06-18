@@ -509,6 +509,14 @@ var app = new Vue({
                     },
                     options: {
                         cutout: "60%",
+                        layout: {
+                            padding: {
+                                left: 50,
+                                right: 50,
+                                top: 50,
+                                bottom: 50
+                            }
+                        },
                         plugins: {
                             legend: {
                                 display: false
