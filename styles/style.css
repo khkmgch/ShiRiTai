@@ -1,0 +1,58 @@
+.text-lg{
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.2rem;
+}
+.text-md{
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1rem;
+}
+.text-sm{
+    font-family: 'Noto Serif JP', serif;
+}
+.icon-md{
+    font-size: 5rem;
+}
+.card-style{
+    background-color: #ffffff;
+    border: 1px solid ;
+    padding: 15px;
+}
+.card-style:hover{
+    border: 2.5px solid;
+}
+/* 上下のスライドアニメーション */
+.fade-enter-active, .fade-leave-active {
+    transition: opacity 1s;
+}
+.fade-enter, .fade-leave-to {
+    opacity: 0;
+    height: 0;
+}
+.card-detail{
+    overflow: hidden;
+}
+/* カードのテキストエリア */
+.card-text-detail{
+    height: 200px;
+    max-height: 270px;
+    overflow: auto;
+}
+/* カード一覧のコンテナ */
+.container{
+    margin-left: -10px;
+    margin-right: -10px;
+}
+/* カードの横幅 */
+.card-width{
+    width: calc(100% - 20px);
+}
+@media (min-width: 768px) { 
+    .card-width{
+        width: calc(50% - 20px);
+    }
+} 
+@media (min-width: 992px) {
+    .card-width{
+        width: calc(25% - 20px);
+    }
+}
