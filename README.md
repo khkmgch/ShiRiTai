@@ -10,6 +10,9 @@ RecursionのProject「To Do List」で作成しました。
 ## Url
 https://khkmgch.github.io/ShiRiTai/
 
+## Demo
+![shiritai](https://github.com/khkmgch/ShiRiTai/assets/101968115/8c63d517-26ba-4768-ae35-5eae2e22d57f)
+
 ## Usage
 あなたの”SHiRiTai”をカードにしましょう。
 
