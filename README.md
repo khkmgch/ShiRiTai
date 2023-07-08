@@ -1,9 +1,7 @@
 # SHiRiTai
 
 ## Descripsiton
-RecursionのProject「To Do List」で作成しました。
-
-あなたの”SHiRiTai”をカードにしてストックできるアプリです。
+あなたの”知りたい”をカードにしてストックできるアプリです。
 ![ShiRiTai11](https://user-images.githubusercontent.com/101968115/174439987-2ed2faae-e13c-4d11-8f07-8eac2c80017e.png)
 
 
