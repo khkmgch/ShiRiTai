@@ -10,6 +10,10 @@ https://khkmgch.github.io/ShiRiTai/
 ## Demo
 ![shiritai](https://github.com/khkmgch/ShiRiTai/assets/101968115/8c63d517-26ba-4768-ae35-5eae2e22d57f)
 
+## 使用技術
+- Vue
+- JavaScript
+- BootStrap
 ## 使い方
 あなたの”SHiRiTai”をカードにしましょう。
 
