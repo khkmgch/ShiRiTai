@@ -1,6 +1,5 @@
 # SHiRiTai
 
-## Descripsiton
 あなたの”知りたい”をカードにしてストックできるアプリです。
 ![ShiRiTai11](https://user-images.githubusercontent.com/101968115/174439987-2ed2faae-e13c-4d11-8f07-8eac2c80017e.png)
 
@@ -11,7 +10,7 @@ https://khkmgch.github.io/ShiRiTai/
 ## Demo
 ![shiritai](https://github.com/khkmgch/ShiRiTai/assets/101968115/8c63d517-26ba-4768-ae35-5eae2e22d57f)
 
-## Usage
+## 使い方
 あなたの”SHiRiTai”をカードにしましょう。
 
 (使用例)　
